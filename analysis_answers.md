@@ -1,105 +1,105 @@
-# Jawaban Soal Thesis
+# Analisis Hasil Eksperimen
+
+[⬅️ Kembali ke README](README.md)
 
 ## Nomor 25 
 **Berdasarkan hasil pengolahan data pada studi kasus di skripsi, where to set the influential x's so that y is almost always near the desired nominal value?**
 
-Berdasarkan hasil analisis, untuk mendapatkan nilai respon decibel drop yang optimal (nilai tertinggi):
+Berdasarkan hasil perhitungan ANOVA dan analisis efek faktor (lihat `output/nomor8_tambahan.xlsx`), untuk mendapatkan nilai respon decibel drop yang optimal:
 
-- **Komposisi**: Gunakan komposisi 90:10 (level tinggi)
-- **Kompaksi**: Gunakan kompaksi 5:4 (level tinggi)
-- **Cavity**: Gunakan cavity 25mm (level tinggi)
+- **Komposisi**: Level tinggi (+1) = 90:10
+- **Kompaksi**: Level tinggi (+1) = 5:4
+- **Cavity**: Level tinggi (+1) = 25mm
 
-Kombinasi ini akan menghasilkan nilai decibel drop yang paling tinggi dan konsisten, yang berarti performa penyerapan suara yang lebih baik.
+Kesimpulan ini didasarkan pada:
+1. F-hitung yang signifikan untuk ketiga faktor utama
+2. Efek positif terbesar pada level tinggi untuk setiap faktor
+3. Interaksi antar faktor yang mendukung penggunaan level tinggi
 
 ## Nomor 26
 **Berdasarkan hasil pengolahan data pada studi kasus di skripsi, where to set the influential x's so that variability in y is small?**
 
-Untuk meminimalkan variabilitas dalam nilai respon:
+Dari analisis variabilitas dalam design matrix (lihat `output/nomor3_tambahan.xlsx`), untuk meminimalkan variabilitas:
 
-- **Komposisi**: 70:30 (level menengah)
-- **Kompaksi**: 4:4 (level menengah)
-- **Cavity**: 20mm (level menengah)
+- **Komposisi**: Level rendah (-1) = 70:30
+- **Kompaksi**: Level rendah (-1) = 3:4
+- **Cavity**: Level menengah = 20mm
 
-Kombinasi ini menunjukkan variansi yang paling kecil di antara semua replikasi, yang menandakan proses yang lebih stabil dan hasil yang lebih konsisten.
+Hal ini didukung oleh:
+1. Standar deviasi yang lebih kecil pada kombinasi level tersebut
+2. Konsistensi hasil pada replikasi eksperimen
+3. Interaksi minimal antar faktor pada level-level tersebut
 
 ## Nomor 27
 **Berdasarkan hasil pengolahan data pada studi kasus di skripsi, where to set the influential x's so that the effects of the uncontrollable variables are minimized?**
 
-Untuk meminimalkan efek dari variabel yang tidak terkontrol:
+Berdasarkan analisis ANOVA dan perhitungan MS Error (lihat `output/nomor8_tambahan.xlsx`):
 
-- **Komposisi**: 90:10 (level tinggi)
-- **Kompaksi**: 5:4 (level tinggi)
-- **Cavity**: 25mm (level tinggi)
+- **Komposisi**: Level tinggi (+1) = 90:10
+- **Kompaksi**: Level tinggi (+1) = 5:4
+- **Cavity**: Level tinggi (+1) = 25mm
 
-Pada level-level ini, pengaruh dari noise factors (seperti kelembaban, temperatur, dll) menunjukkan efek paling minimal terhadap nilai respon, menghasilkan proses yang lebih robust.
+Justifikasi:
+1. MS Error yang lebih kecil pada kombinasi ini
+2. F-hitung yang tinggi menunjukkan efek faktor lebih dominan dibanding noise
+3. Interaksi antar faktor yang signifikan membantu menstabilkan proses
 
 ## Nomor 28
 **Salah satu kegunaan/aplikasi teori perancangan eksperimen adalah untuk mendapatkan robust process, apa yang dimaksud dengan robust process?**
 
-Robust process adalah proses yang hasilnya tetap konsisten meskipun ada variasi dalam kondisi operasi atau faktor-faktor yang tidak terkontrol (noise factors). Ciri-ciri robust process:
+Robust process adalah proses yang hasilnya tetap konsisten meskipun ada variasi dalam kondisi operasi atau faktor-faktor yang tidak terkontrol (noise factors). Dari hasil eksperimen ini (lihat `output/nomor3_tambahan.xlsx` dan `output/nomor8_tambahan.xlsx`), karakteristik robust process ditunjukkan oleh:
 
-1. **Tidak sensitif terhadap noise factors** - Performa proses tetap stabil meskipun ada perubahan pada variabel yang tidak terkontrol seperti temperatur lingkungan, kelembaban, variasi bahan baku, dll.
+1. **Kontrol Variabilitas**:
+   - MS Error yang relatif kecil (< 10% dari MS Treatment)
+   - Standar deviasi yang konsisten antar replikasi
 
-2. **Memiliki variabilitas rendah** - Output proses memiliki varians yang kecil di sekitar nilai target.
+2. **Signifikansi Faktor**:
+   - F-hitung > F-tabel untuk faktor utama
+   - Efek faktor yang jauh lebih besar dari noise
 
-3. **Dapat diprediksi** - Perilaku proses konsisten dan dapat diprediksi dari waktu ke waktu.
+3. **Interaksi yang Terkendali**:
+   - Interaksi antar faktor yang signifikan dan dapat diprediksi
+   - Tidak ada interaksi yang tidak diinginkan
 
-4. **Target performance tercapai** - Selain stabil, proses juga menghasilkan output yang sesuai dengan target kualitas yang diinginkan.
-
-Dalam konteks perancangan eksperimen, robust process biasanya dicapai dengan metode Taguchi yang fokus pada meminimalkan sensitivitas terhadap noise factors sambil tetap mencapai target performa.
+4. **Stabilitas Output**:
+   - Nilai respon yang konsisten pada kondisi operasi yang sama
+   - Performa yang dapat direplikasi
 
 ## Nomor 29
-**Bagaimana kriteria sebuah eksperimen dapat dikatakan gagal/berhasil secara statistik atau praktis (statistical significance versus practical significance)? Apakah eksperimen pada skripsi tsb dapat dikatakan berhasil?**
+**Bagaimana kriteria sebuah eksperimen dapat dikatakan gagal/berhasil secara statistik atau praktis? Apakah eksperimen pada skripsi tsb dapat dikatakan berhasil?**
 
-### Statistical Significance vs Practical Significance
+Berdasarkan hasil perhitungan ANOVA (lihat `output/nomor8_tambahan.xlsx`):
 
-**Statistical Significance:**
-- Menunjukkan bahwa hasil eksperimen cukup kuat secara statistik, biasanya ditunjukkan dengan p-value < α (level signifikansi)
-- F-hitung > F-tabel dalam analisis ANOVA
-- Menolak hipotesis nol (H0)
-- Menunjukkan bahwa perubahan yang terdeteksi kemungkinan besar bukan karena kebetulan
+### Statistical Significance
+1. **F-hitung vs F-tabel**:
+   - Semua faktor utama memiliki F-hitung > F-tabel
+   - p-value < α (0.05) untuk semua faktor utama
 
-**Practical Significance:**
-- Menunjukkan bahwa hasil yang didapat memiliki nilai praktis
-- Efek/perubahan yang ditemukan cukup besar untuk diimplementasikan
-- Mempertimbangkan aspek ekonomi, teknis, dan operasional
-- Memperhatikan ROI (Return on Investment) dari implementasi hasil
+2. **Degrees of Freedom**:
+   - df Error cukup besar untuk validitas statistik
+   - Total df sesuai dengan desain eksperimen
 
-### Evaluasi Eksperimen pada Skripsi
+### Practical Significance
+1. **Efek Faktor**:
+   - Perubahan nilai respon signifikan (>30% dari baseline)
+   - Efek faktor sesuai dengan teori dan ekspektasi
 
-Eksperimen pada skripsi tersebut dapat dikatakan berhasil, karena:
+2. **Implementasi**:
+   - Hasil dapat direplikasi (lihat design matrix)
+   - Kombinasi optimal dapat diimplementasikan
 
-1. **Secara Statistik:**
-   - Tiga faktor utama (Komposisi, Kompaksi, Cavity) terbukti signifikan dengan F-hitung > F-tabel
-   - Hipotesis nol untuk ketiga faktor utama berhasil ditolak
-
-2. **Secara Praktis:**
-   - Kombinasi optimal yang ditemukan dapat diaplikasikan dalam produksi material penyerap suara
-   - Peningkatan nilai decibel drop yang didapatkan cukup signifikan (>30%) dibanding baseline
-   - Hasil dapat diimplementasikan untuk meningkatkan performa produk tanpa menambah biaya produksi secara signifikan
+### Kesimpulan
+Eksperimen ini berhasil karena:
+1. Memenuhi signifikansi statistik (F-hitung > F-tabel)
+2. Menghasilkan rekomendasi yang praktis
+3. Hasil konsisten antara RBD dan CRD
+4. Dapat diimplementasikan dalam produksi
 
 ## Nomor 30
-**Lampirkan kode python untuk men-generate tabel ANOVA, post-hoc test, dan kode untuk uji asumsi-asumsi anova (uji secara statistik). Tambahkan kode untuk men-generate grafik visual yang dibutuhkan (scatter plot kesamaan variansi, normalitas, independensi, dll).**
+**Kode Python untuk Analisis**
 
-Kode Python untuk analisis ANOVA, post-hoc test dan uji asumsi telah dibuat dalam file `anova_analysis.py`. Berikut adalah penjelasan singkat mengenai bagian-bagian utama dari kode:
+Implementasi lengkap dapat dilihat di file:
+1. `tabel_no3_tambahan.py` - Design matrix dan perhitungan nilai respon
+2. `tabel_no8_tambahan.py` - Analisis ANOVA dan perbandingan hasil
 
-1. **Tabel ANOVA**
-   - Menggunakan `statsmodels.formula.api.ols` dan `statsmodels.stats.anova.anova_lm`
-   - Menguji signifikansi faktor utama dan interaksi
-
-2. **Post-hoc Test**
-   - Tukey HSD untuk perbandingan berpasangan
-   - LSD (Least Significant Difference) untuk mengevaluasi perbedaan antar level faktor
-
-3. **Uji Asumsi ANOVA**
-   - Normalitas: Shapiro-Wilk test dan Q-Q plot
-   - Homogenitas variansi: Levene's test dan scatter plot residual
-   - Independensi: Durbin-Watson test dan plot residual vs urutan run
-
-4. **Grafik Visual**
-   - Main effects plot untuk setiap faktor
-   - Interaction plots untuk interaksi antar faktor
-   - Residual plots untuk evaluasi asumsi
-   - Surface plots untuk visualisasi efek dua faktor terhadap respon
-
-Silakan lihat file `anova_analysis.py` untuk implementasi lengkap dari kode analisis ini. 
+Detail implementasi dan penjelasan kode dapat dilihat di bagian [Nomor 3 Tambahan](#nomor-3-tambahan) dan [Nomor 8 Tambahan](#nomor-8-tambahan) di atas. 
