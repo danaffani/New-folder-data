@@ -4,60 +4,49 @@ from scipy import stats
 
 def compare_anova_results():
     try:
-        # Baca file Excel untuk tabel referensi
         excel_file = "input/semua_tabel.xlsx"
         reference_table = pd.read_excel(excel_file, sheet_name='tabel_4.6')
         
-        # Baca data eksperimen dari hasil nomor 3
         experiment_data = pd.read_excel('output/nomor3_tambahan.xlsx', sheet_name='RBD')
         
         def calculate_anova_from_data(data):
-            # Hitung total observations dan replication
             n_total = len(data)
-            n_rep = 3  # jumlah replikasi
-            n_treatments = 8  # jumlah treatment (2^3 factorial)
+            n_rep = 3  
+            n_treatments = 8  
             
-            # Hitung Total Sum of Squares (SS Total)
             grand_mean = data['Nilai Respon'].mean()
             ss_total = sum((data['Nilai Respon'] - grand_mean) ** 2)
             
-            # Hitung Treatment SS (Perlakuan)
             treatment_means = data.groupby(['A', 'B', 'C'])['Nilai Respon'].mean()
             ss_treatment = sum((treatment_means - grand_mean) ** 2) * n_rep
             
-            # Hitung Main Effects SS
             def calculate_main_effect_ss(factor):
                 factor_means = data.groupby(factor)['Nilai Respon'].mean()
                 return sum((factor_means - grand_mean) ** 2) * (n_total / 2)
             
-            ss_A = calculate_main_effect_ss('A')  # Komposisi
-            ss_B = calculate_main_effect_ss('B')  # Kompaksi
-            ss_C = calculate_main_effect_ss('C')  # Cavity
+            ss_A = calculate_main_effect_ss('A')  
+            ss_B = calculate_main_effect_ss('B')  
+            ss_C = calculate_main_effect_ss('C')  
             
-            # Hitung Interaction SS
             def calculate_interaction_ss(factor1, factor2):
                 interaction_means = data.groupby([factor1, factor2])['Nilai Respon'].mean()
                 return sum((interaction_means - grand_mean) ** 2) * (n_total / 4) - \
                        calculate_main_effect_ss(factor1) - calculate_main_effect_ss(factor2)
             
-            ss_AB = calculate_interaction_ss('A', 'B')  # Komposisi*Kompaksi
-            ss_AC = calculate_interaction_ss('A', 'C')  # Komposisi*Cavity
-            ss_BC = calculate_interaction_ss('B', 'C')  # Kompaksi*Cavity
+            ss_AB = calculate_interaction_ss('A', 'B')  
+            ss_AC = calculate_interaction_ss('A', 'C')  
+            ss_BC = calculate_interaction_ss('B', 'C')  
             
-            # Hitung Three-way Interaction SS (Seluruh Faktor)
             ss_ABC = ss_treatment - (ss_A + ss_B + ss_C + ss_AB + ss_AC + ss_BC)
             
-            # Hitung Error SS
             ss_error = ss_total - ss_treatment
             
-            # Degrees of Freedom
             df_treatment = n_treatments - 1
-            df_main = 1  # untuk setiap main effect
-            df_interaction = 1  # untuk setiap interaction
+            df_main = 1  
+            df_interaction = 1  
             df_error = n_total - n_treatments
             df_total = n_total - 1
             
-            # Mean Squares
             ms_treatment = ss_treatment / df_treatment
             ms_A = ss_A / df_main
             ms_B = ss_B / df_main
@@ -68,7 +57,6 @@ def compare_anova_results():
             ms_ABC = ss_ABC / df_interaction
             ms_error = ss_error / df_error
             
-            # F-values
             f_A = ms_A / ms_error
             f_B = ms_B / ms_error
             f_C = ms_C / ms_error
@@ -77,10 +65,8 @@ def compare_anova_results():
             f_BC = ms_BC / ms_error
             f_ABC = ms_ABC / ms_error
             
-            # F-critical value (α = 0.05)
             f_crit = stats.f.ppf(0.95, df_main, df_error)
             
-            # Buat hasil ANOVA dalam format yang sama dengan tabel 4.6
             results = pd.DataFrame([
                 {'Faktor': 'Perlakuan', 'df': df_treatment, 'SS': ss_treatment, 'MS': ms_treatment},
                 {'Faktor': 'Komposisi', 'df': df_main, 'SS': ss_A, 'MS': ms_A, 'Fhit': f_A, 'Ftab': f_crit, 
@@ -103,10 +89,8 @@ def compare_anova_results():
             
             return results
         
-        # Hitung ANOVA dari data eksperimen
         calculated_results = calculate_anova_from_data(experiment_data)
         
-        # Buat tabel perbandingan
         comparison_data = []
         for idx, ref_row in reference_table.iterrows():
             calc_row = calculated_results[calculated_results['Faktor'] == ref_row['Faktor']].iloc[0]
@@ -132,18 +116,13 @@ def compare_anova_results():
                 ) else 'Tidak'
             })
         
-        # Buat DataFrame perbandingan
         comparison_df = pd.DataFrame(comparison_data)
         
-        # Simpan hasil ke Excel
         with pd.ExcelWriter('output/nomor8_tambahan.xlsx') as writer:
-            # Simpan hasil perhitungan ANOVA
             calculated_results.to_excel(writer, sheet_name='Hasil ANOVA', index=False)
             
-            # Simpan tabel perbandingan
             comparison_df.to_excel(writer, sheet_name='Perbandingan', index=False)
             
-            # Simpan tabel referensi
             reference_table.to_excel(writer, sheet_name='Tabel 4.6 Reference', index=False)
         
         print("\nPerbandingan ANOVA telah disimpan di output/nomor8_tambahan.xlsx")

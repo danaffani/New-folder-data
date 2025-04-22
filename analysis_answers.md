@@ -102,4 +102,171 @@ Implementasi lengkap dapat dilihat di file:
 1. `tabel_no3_tambahan.py` - Design matrix dan perhitungan nilai respon
 2. `tabel_no8_tambahan.py` - Analisis ANOVA dan perbandingan hasil
 
-Detail implementasi dan penjelasan kode dapat dilihat di bagian [Nomor 3 Tambahan](#nomor-3-tambahan) dan [Nomor 8 Tambahan](#nomor-8-tambahan) di atas. 
+## Nomor 3 Tambahan
+**Penjelasan Design Matrix dan Perhitungan Nilai Respon**
+
+File `tabel_no3_tambahan.py` menghasilkan design matrix untuk dua jenis desain eksperimen:
+1. Randomized Block Design (RBD)
+2. Completely Randomized Design (CRD)
+
+### Struktur Tabel Output
+Kedua design matrix memiliki kolom-kolom berikut:
+- **StdOrder**: Urutan standar treatment (1-24)
+  - Menunjukkan urutan asli treatment sebelum randomisasi
+  - Memudahkan tracking kombinasi faktor
+- **Blocks**: Blok replikasi 
+  - RBD: 3 blok (1-3), 8 treatment per blok
+  - CRD: 1 blok, 24 treatment total
+- **A**: Level faktor Komposisi
+  - -1 = 70:30 (rasio serat:matriks)
+  - +1 = 90:10 (rasio serat:matriks)
+- **B**: Level faktor Kompaksi
+  - -1 = 3:4 (rasio tekanan)
+  - +1 = 5:4 (rasio tekanan)
+- **C**: Level faktor Cavity
+  - -1 = 15mm (ketebalan)
+  - +1 = 25mm (ketebalan)
+- **RunOrder**: Urutan eksekusi teracak
+  - RBD: Randomisasi dalam setiap blok
+  - CRD: Randomisasi total
+- **Jadwal**: Waktu pelaksanaan (interval 30 menit)
+  - Format: HH:MM
+  - Mulai: 08:00
+- **Nilai Respon**: Decibel drop (dB)
+  - Dihitung dari model efek dan interaksi
+  - Termasuk random noise
+
+### Proses Perhitungan
+1. **Randomisasi**:
+   ```python
+   # RBD - Randomisasi per blok
+   for block in range(1, n_replications + 1):
+       block_indices = list(range((block-1)*n_treatments + 1, block*n_treatments + 1))
+       np.random.shuffle(block_indices)
+       run_order.extend(block_indices)
+   
+   # CRD - Randomisasi total
+   run_order = list(range(1, total_runs + 1))
+   np.random.shuffle(run_order)
+   ```
+
+2. **Model Nilai Respon**:
+   ```python
+   response = base_value + effect_A + effect_B + effect_C + 
+             interaction_AB + interaction_AC + interaction_BC + 
+             interaction_ABC + noise
+   ```
+   Komponen:
+   - **base_value** = 50 
+     - Nilai dasar respon
+     - Representasi kondisi normal
+   - **Efek Utama**:
+     - effect_A = 5 * A (Komposisi)
+     - effect_B = 3 * B (Kompaksi)
+     - effect_C = 4 * C (Cavity)
+   - **Interaksi 2 Faktor**:
+     - interaction_AB = 2 * A * B
+     - interaction_AC = 1.5 * A * C
+     - interaction_BC = 1 * B * C
+   - **Interaksi 3 Faktor**:
+     - interaction_ABC = 0.5 * A * B * C
+   - **Random Noise**:
+     - noise = normal(0,1)
+     - Simulasi variasi proses
+
+### Output File (nomor3_tambahan.xlsx)
+1. **Sheet 'RBD'**:
+   - Design matrix untuk Randomized Block Design
+   - 24 baris (8 treatment × 3 replikasi)
+   - Randomisasi per blok
+
+2. **Sheet 'CRD'**:
+   - Design matrix untuk Completely Randomized Design
+   - 24 baris total
+   - Randomisasi menyeluruh
+
+## Nomor 8 Tambahan
+**Perhitungan dan Perbandingan ANOVA**
+
+File `tabel_no8_tambahan.py` melakukan perhitungan ANOVA dan membandingkan dengan referensi.
+
+### Proses Perhitungan ANOVA
+1. **Sum of Squares (SS)**:
+   ```python
+   # Total SS
+   grand_mean = data['Nilai Respon'].mean()
+   ss_total = sum((data['Nilai Respon'] - grand_mean) ** 2)
+   
+   # Treatment SS
+   treatment_means = data.groupby(['A', 'B', 'C'])['Nilai Respon'].mean()
+   ss_treatment = sum((treatment_means - grand_mean) ** 2) * n_rep
+   
+   # Factor SS
+   def calculate_main_effect_ss(factor):
+       factor_means = data.groupby(factor)['Nilai Respon'].mean()
+       return sum((factor_means - grand_mean) ** 2) * (n_total / 2)
+   ```
+
+2. **Degrees of Freedom (df)**:
+   ```python
+   df_treatment = n_treatments - 1     # 7
+   df_main = 1                        # Untuk setiap faktor
+   df_interaction = 1                 # Untuk setiap interaksi
+   df_error = n_total - n_treatments  # 16
+   df_total = n_total - 1            # 23
+   ```
+
+3. **Mean Square (MS)**:
+   ```python
+   ms_treatment = ss_treatment / df_treatment
+   ms_A = ss_A / df_main
+   ms_B = ss_B / df_main
+   ms_C = ss_C / df_main
+   ms_error = ss_error / df_error
+   ```
+
+4. **F-values**:
+   ```python
+   f_A = ms_A / ms_error
+   f_B = ms_B / ms_error
+   f_C = ms_C / ms_error
+   f_crit = stats.f.ppf(0.95, df_main, df_error)
+   ```
+
+### Struktur Output (nomor8_tambahan.xlsx)
+1. **Sheet 'Hasil ANOVA'**:
+   - **Faktor**: Nama komponen (faktor/interaksi)
+   - **df**: Derajat kebebasan
+   - **SS**: Sum of squares (variasi)
+   - **MS**: Mean square (SS/df)
+   - **Fhit**: F-value hitung (MS_faktor/MS_error)
+   - **Ftab**: F-value kritis (α=0.05)
+   - **Keterangan**: Status signifikansi
+
+2. **Sheet 'Perbandingan'**:
+   - **Faktor**: Nama komponen
+   - **df_ref/calc**: Derajat kebebasan (referensi vs hitung)
+   - **SS_ref/calc**: Sum of squares (referensi vs hitung)
+   - **MS_ref/calc**: Mean square (referensi vs hitung)
+   - **Fhit_ref/calc**: F-value (referensi vs hitung)
+   - **Ftab_ref/calc**: F-critical (referensi vs hitung)
+   - **Keterangan_ref/calc**: Status signifikansi
+   - **Match?**: Kesesuaian hasil (Ya/Tidak)
+
+3. **Sheet 'Tabel 4.6 Reference'**: 
+   - Tabel ANOVA dari skripsi
+   - Digunakan sebagai validasi
+   - Format identik dengan 'Hasil ANOVA'
+
+### Interpretasi Hasil
+1. **Signifikansi Statistik**:
+   - Fhit > Ftab: Faktor signifikan
+   - Semakin besar Fhit: Semakin kuat pengaruh
+
+2. **Kontribusi Faktor**:
+   - SS besar: Kontribusi besar
+   - MS besar: Efek kuat per df
+
+3. **Validasi Model**:
+   - MS Error kecil: Model fit baik
+   - Match? "Ya": Hasil sesuai referensi 
