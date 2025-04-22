@@ -1,0 +1,5 @@
+Tabel 4.10 Hasil perhitungan rata-rata nilai decibel drop faktor kompaksi
+
+Kompaksi  | 3 : 4 (B1) | 4 : 4 (B2) | 5 : 4 (B3)
+----------|------------|------------|------------
+Rata-rata |    3.65    |    3.29    |    2.98 

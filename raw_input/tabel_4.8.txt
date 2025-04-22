@@ -1,0 +1,6 @@
+Tabel 4.8 Hasil perhitungan LSR faktor komposisi
+
+Signifikan |     2      |      3     |
+-----------|------------|------------|
+   rate    |    2.804   |    3.362   |
+   LSR     |    0.073   |    0.088   | 

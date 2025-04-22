@@ -1,0 +1,8 @@
+Tabel 4.16 Hasil perhitungan rata-rata nilai decibel drop faktor komposisi dan kompaksi
+
+Komposisi  |              Kompaksi              |
+          | 3 : 4 (B1) | 4 : 4 (B2) | 5 : 4 (B3) |
+-----------|------------|------------|------------|
+50 : 50 (A1)|    3.36    |    3.08    |    2.79    |
+70 : 30 (A2)|    3.50    |    3.70    |    3.97    |
+90 : 10 (A3)|    4.10    |    3.09    |    2.17    |

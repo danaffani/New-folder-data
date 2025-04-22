@@ -1,0 +1,12 @@
+Nuisance Factors
+
+nuisance factor (units) | measurement precision How known? | strategy (e.g., randomization, blocking, etc.) | anticipated effects
+------------------------|-----------------------------------|----------------------------------------------|--------------------
+Suhu ruangan (°C) | ±0.5°C, Termometer digital | Pengukuran dilakukan pada ruangan dengan suhu terkontrol (25±2°C) | Perubahan suhu dapat mempengaruhi karakteristik penyerapan bunyi
+Kelembaban udara (%) | ±2%, Hygrometer digital | Pengukuran dilakukan pada kondisi kelembaban terkontrol (50±5%) | Kelembaban tinggi dapat mempengaruhi karakteristik material
+Keterampilan operator | Subjektif, Pelatihan operator | Satu operator yang sama melakukan semua pengukuran | Mengurangi variasi karena perbedaan teknik pengukuran
+Variasi pembuatan sampel | ±0.2mm, Caliper digital | Randomisasi urutan pembuatan sampel | Mengurangi bias sistematis dalam proses pembuatan
+Kalibrasi alat ukur | Standar kalibrasi alat | Kalibrasi alat dilakukan sebelum pengukuran | Memastikan konsistensi hasil pengukuran
+Posisi sampel pada alat ukur | ±1mm, Penggaris | Penandaan posisi yang sama untuk setiap sampel | Mengurangi variasi karena perbedaan posisi pengukuran
+Tekanan pada saat kompaksi | ±0.1 MPa, Pressure gauge | Pengaturan tekanan yang konsisten untuk setiap level kompaksi | Memastikan densitas material sesuai dengan yang diinginkan
+Homogenitas campuran material | Visual inspection | Pengadukan campuran dengan waktu yang sama (10 menit) | Memastikan distribusi material merata dalam sampel 

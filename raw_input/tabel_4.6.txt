@@ -1,0 +1,14 @@
+Tabel 4.6 Hasil perhitungan ANOVA nilai koefisien serap bunyi
+
+Faktor             | df  |   SS    |   MS    |  Fhit   | Ftab (α=0,05) | Keterangan |
+-------------------|-----|---------|---------|---------|--------------|------------|
+Perlakuan          | 26  | 1475.90 | 56.76519|         |              |            |
+Komposisi          | 2   |   11.78 | 5.88925 | 2873.486| 3.080386863  | Signifikan |
+Kompaksi           | 2   |   10.21 | 5.103314| 2490.012| 3.080386863  | Signifikan |
+Cavity             | 2   |   12.04 | 6.021029| 2937.784| 3.080386863  | Signifikan |
+Komposisi*Kompaksi | 4   |   21.75 | 5.436283| 2663.562| 2.455766817  | Signifikan |
+Komposisi*Cavity   | 4   |    1.24 | 0.310764|  153.8291| 2.455766817 | Signifikan |
+Kompaksi*Cavity    | 4   |    0.41 | 0.103743|   45.5692| 2.455766817 | Signifikan |
+Seluruh Faktor     | 8   |    1.60 | 0.199547|   93.24303| 2.025247482| Signifikan |
+Galat              | 108 |    0.22 | 0.00205 |         |              |            |
+Total              | 134 |   59.25 |         |         |              |            | 

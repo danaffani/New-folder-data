@@ -1,0 +1,7 @@
+Tabel 4.15 Hasil perhitungan selisih setiap perlakuan faktor cavity
+
+          |    C2    |    C3    |    C1    |
+----------|----------|----------|----------|
+    C2    |          |          |          |
+    C3    |   0.062  |          |          |
+    C1    |   0.659  |   0.616  |          | 

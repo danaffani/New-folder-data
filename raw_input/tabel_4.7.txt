@@ -1,0 +1,5 @@
+Tabel 4.7 Hasil perhitungan rata-rata nilai decibel drop faktor komposisi
+
+Komposisi | 50 : 50 (A1) | 70 : 30 (A2) | 90 : 10 (A3)
+----------|--------------|--------------|-------------
+Rata-rata |     3.08     |     3.72     |     3.12 

@@ -1,0 +1,7 @@
+Tabel 4.12 Hasil perhitungan selisih setiap perlakuan faktor kompaksi
+
+          |    B3    |    B2    |    B1    |
+----------|----------|----------|----------|
+    B3    |          |          |          |
+    B2    |   0.214  |          |          |
+    B1    |   0.575  |   0.531  |          | 

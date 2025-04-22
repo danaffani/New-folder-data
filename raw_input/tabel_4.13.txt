@@ -1,0 +1,5 @@
+Tabel 4.13 Hasil perhitungan rata-rata nilai decibel drop faktor cavity
+
+Cavity   | 15mm (C1) | 20mm (C2) | 25mm (C3)
+---------|-----------|-----------|----------
+Rata-rata|    3.73   |    3.14   |    3.05 

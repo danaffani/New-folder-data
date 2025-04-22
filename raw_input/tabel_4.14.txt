@@ -1,0 +1,6 @@
+Tabel 4.14 Hasil perhitungan LSR pada faktor cavity
+
+Signifikan |     2      |      3     |
+-----------|------------|------------|
+   rate    |    2.804   |    3.362   |
+   LSR     |    0.073   |    0.088   | 

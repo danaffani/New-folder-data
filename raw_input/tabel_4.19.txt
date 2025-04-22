@@ -1,0 +1,8 @@
+Tabel 4.19 Hasil perhitungan rata-rata nilai decibel drop faktor komposisi dan cavity
+
+Komposisi  |              Cavity               |
+          | 15mm (C1) | 20mm (C2) | 25mm (C3) |
+-----------|-----------|-----------|-----------|
+50 : 50 (A1)|   3.55    |   2.84    |   2.83    |
+70 : 30 (A2)|   4.27    |   3.53    |   3.37    |
+90 : 10 (A3)|   3.36    |   3.04    |   2.96    | 

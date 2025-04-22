@@ -1,0 +1,7 @@
+Tabel 4.9 Hasil perhitungan selisih setiap perlakuan faktor komposisi
+
+          |    A1    |    A3    |    A2    |
+----------|----------|----------|----------|
+    A1    |          |          |          |
+    A3    |   0.044  |          |          |
+    A2    |   0.647  |   0.604  |          | 

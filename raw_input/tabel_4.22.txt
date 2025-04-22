@@ -1,0 +1,8 @@
+Tabel 4.22 Hasil perhitungan rata-rata nilai decibel drop faktor kompaksi dan cavity
+
+Komposisi  |              Cavity               |
+          | 15mm (C1) | 20mm (C2) | 25mm (C3) |
+-----------|-----------|-----------|-----------|
+ 3 : 4 (B1)|    4.16   |    3.48   |    3.11   |
+ 4 : 4 (B2)|    3.70   |    3.13   |    3.03   |
+ 5 : 4 (B3)|    3.32   |    2.81   |    2.81   | 

@@ -1,0 +1,9 @@
+Tabel 4.5 Hasil perhitungan berdasarkan interaksi faktor komposisi dan kompaksi
+
+Komposisi | Kompaksi               |  Total  |
+         |  3 : 4  |  4 : 4  |  5 : 4  |        |
+----------|---------|---------|---------|--------|
+  50 : 50 |  50.37  |  46.23  |  41.83  | 138.43 |
+  70 : 30 |  52.49  |  55.45  |  59.62  | 167.55 |
+  90 : 10 |  61.45  |  46.37  |  32.57  | 140.39 |
+  Total   | 164.30  | 148.04  | 134.02  | 446.37 | 
