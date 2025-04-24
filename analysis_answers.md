@@ -96,11 +96,22 @@ Eksperimen ini berhasil karena:
 4. Dapat diimplementasikan dalam produksi
 
 ## Nomor 30
-**Kode Python untuk Analisis**
+**Kode Python untuk Visualisasi dan Analisis Grafis**
 
-Implementasi lengkap dapat dilihat di file:
-1. `tabel_no3_tambahan.py` - Design matrix dan perhitungan nilai respon
-2. `tabel_no8_tambahan.py` - Analisis ANOVA dan perbandingan hasil
+Visualisasi hasil analisis ditampilkan melalui berbagai plot yang menunjukkan distribusi data, interaksi antar faktor, dan perbandingan nilai respon.
+
+### Dokumentasi Lengkap
+Untuk detail lengkap mengenai visualisasi dan plot-plot yang dihasilkan, lihat:
+- [Dokumentasi Plot Nomor 30](dokumentasi_plot_no30.md)
+- Output plot tersedia di folder `output/plot/`
+
+### Plot yang Dihasilkan
+- **Interaction Plot**: Menampilkan interaksi antar faktor
+- **Means Plot**: Rata-rata respon per faktor
+- **Posthoc Plot**: Analisis post-hoc untuk perbandingan
+- **Normality Plot**: Uji normalitas residual
+- **Homogeneity Plot**: Uji homogenitas varians
+- **Independence Plot**: Uji independensi residual
 
 ## Nomor 3 Tambahan
 **Penjelasan Design Matrix dan Perhitungan Nilai Respon**
@@ -108,6 +119,11 @@ Implementasi lengkap dapat dilihat di file:
 File `tabel_no3_tambahan.py` menghasilkan design matrix untuk dua jenis desain eksperimen:
 1. Randomized Block Design (RBD)
 2. Completely Randomized Design (CRD)
+
+### Dokumentasi Lengkap
+Untuk penjelasan detail tentang pembuatan design matrix, perhitungan nilai respon, dan interpretasinya, lihat:
+- [Dokumentasi Tabel Nomor 3 Tambahan](dokumentasi_tabel_no3_tambahan.md)
+- Output file tersedia di `output/nomor3_tambahan.xlsx`
 
 ### Struktur Tabel Output
 Kedua design matrix memiliki kolom-kolom berikut:
@@ -189,6 +205,11 @@ Kedua design matrix memiliki kolom-kolom berikut:
 **Perhitungan dan Perbandingan ANOVA**
 
 File `tabel_no8_tambahan.py` melakukan perhitungan ANOVA dan membandingkan dengan referensi.
+
+### Dokumentasi Lengkap
+Untuk penjelasan detail tentang perhitungan ANOVA, perbandingan hasil, dan interpretasinya, lihat:
+- [Dokumentasi Tabel Nomor 8 Tambahan](dokumentasi_tabel_no8_tambahan.md)
+- Output file tersedia di `output/nomor8_tambahan.xlsx`
 
 ### Proses Perhitungan ANOVA
 1. **Sum of Squares (SS)**:
