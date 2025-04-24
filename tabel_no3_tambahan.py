@@ -3,83 +3,31 @@ import numpy as np
 
 def create_design_matrices():
     try:
-        excel_file = "input/semua_tabel.xlsx"
-        data = pd.read_excel(excel_file, sheet_name=None)
+        excel_file = "input/tabel_koef_Serap_bunyi.xlsx"
         
-        def calculate_response(A, B, C):
-            base_value = 50  
-            
-            effect_A = 5 * A  
-            effect_B = 3 * B  
-            effect_C = 4 * C  
-            
-            interaction_AB = 2 * A * B
-            interaction_AC = 1.5 * A * C
-            interaction_BC = 1 * B * C
-            
-            interaction_ABC = 0.5 * A * B * C
-            
-            noise = np.random.normal(0, 1)
-            
-            response = base_value + effect_A + effect_B + effect_C + \
-                      interaction_AB + interaction_AC + interaction_BC + \
-                      interaction_ABC + noise
-            
-            return round(response, 2)
-
-        def create_matrix(design_type):
-            n_treatments = 8
-            n_replications = 3
-            total_runs = n_treatments * n_replications
-            
-            df = pd.DataFrame({
-                'StdOrder': range(1, total_runs + 1),
-                'Blocks': [i for i in range(1, n_replications + 1) for _ in range(n_treatments)] if design_type == 'RBD' else [1] * total_runs,
-                'A': [-1, -1, -1, -1, 1, 1, 1, 1] * n_replications,
-                'B': [-1, -1, 1, 1, -1, -1, 1, 1] * n_replications,
-                'C': [-1, 1, -1, 1, -1, 1, -1, 1] * n_replications
-            })
-            
-            if design_type == 'RBD':
-                run_order = []
-                for block in range(1, n_replications + 1):
-                    block_indices = list(range((block-1)*n_treatments + 1, block*n_treatments + 1))
-                    np.random.shuffle(block_indices)
-                    run_order.extend(block_indices)
-            else:
-                run_order = list(range(1, total_runs + 1))
-                np.random.shuffle(run_order)
-            
-            df['RunOrder'] = run_order
-            
-            df = df.sort_values('RunOrder').reset_index(drop=True)
-            
-            start_time = pd.Timestamp('2024-01-01 08:00:00')
-            df['Jadwal'] = [start_time + pd.Timedelta(minutes=30*i) for i in range(len(df))]
-            df['Jadwal'] = df['Jadwal'].dt.strftime('%H:%M')
-            
-            df['Nilai Respon'] = df.apply(lambda row: calculate_response(row['A'], row['B'], row['C']), axis=1)
-            
-            return df
+        df_rbd = pd.read_excel(excel_file, sheet_name='RBD')
+        df_crd = pd.read_excel(excel_file, sheet_name='CRD')
         
-        np.random.seed(42)
-        
-        rbd_matrix = create_matrix('RBD')
-        crd_matrix = create_matrix('CRD')
+        for df in [df_rbd, df_crd]:
+            df['A'] = df['Komposisi'].map({"50 : 50": -1, "70 : 30": 0, "90 : 10": 1})
+            df['B'] = df['Kompaksi'].map({"3 : 4": -1, "4 : 4": 0, "5 : 4": 1})
+            df['C'] = df['Cavity'].map({"15 mm": -1, "20 mm": 0, "25 mm": 1})
         
         with pd.ExcelWriter('output/nomor3_tambahan.xlsx') as writer:
-            rbd_matrix.to_excel(writer, sheet_name='RBD', index=False)
-            crd_matrix.to_excel(writer, sheet_name='CRD', index=False)
+            df_rbd.to_excel(writer, sheet_name='RBD', index=False)
+            df_crd.to_excel(writer, sheet_name='CRD', index=False)
+            
+            df_rata = df_rbd[df_rbd['Frekuensi'] == "Rata-rata"].copy()
             
             response_data = pd.DataFrame({
                 'A': [-1, -1, -1, -1, 1, 1, 1, 1],
                 'B': [-1, -1, 1, 1, -1, -1, 1, 1],
                 'C': [-1, 1, -1, 1, -1, 1, -1, 1],
-                'Response_Mean': [rbd_matrix[
-                    (rbd_matrix['A'] == a) & 
-                    (rbd_matrix['B'] == b) & 
-                    (rbd_matrix['C'] == c)
-                ]['Nilai Respon'].mean() 
+                'Response_Mean': [df_rata[
+                    (df_rata['A'] == a) & 
+                    (df_rata['B'] == b) & 
+                    (df_rata['C'] == c)
+                ]['Rata-rata Koefisien'].mean() 
                 for a, b, c in zip(
                     [-1, -1, -1, -1, 1, 1, 1, 1],
                     [-1, -1, 1, 1, -1, -1, 1, 1],
@@ -89,6 +37,9 @@ def create_design_matrices():
             response_data.to_excel(writer, sheet_name='Response_Data', index=False)
         
         print("Design matrices telah dibuat dan disimpan di output/nomor3_tambahan.xlsx")
+        print(f"Jumlah baris RBD: {len(df_rbd)} (dengan semua frekuensi dan rata-rata)")
+        print(f"Jumlah baris CRD: {len(df_crd)} (dengan semua frekuensi dan rata-rata)")
+        print("Data diambil dari file tabel_koef_Serap_bunyi.xlsx")
         
     except Exception as e:
         print(f"Terjadi error: {str(e)}")

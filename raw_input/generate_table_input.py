@@ -2,10 +2,8 @@ import pandas as pd
 import os
 
 def create_all_tables_excel(output_file="input/semua_tabel.xlsx"):
-    # Memastikan direktori output ada
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     
-    # Dictionary untuk menyimpan data setiap tabel
     all_tables_data = {}
     
     # Tabel 4.1 - Noise Reduction Coefficient
