@@ -1,6 +1,6 @@
-# Analisis Data Eksperimen
+# Analisis Data Eksperimen Material Penyerap Suara
 
-Repository ini berisi kode Python untuk menganalisis data eksperimen dari skripsi tentang material penyerap suara.
+Repository ini berisi kode Python untuk menganalisis data eksperimen dari skripsi tentang material penyerap suara. Analisis meliputi pembuatan design matrix, analisis ANOVA, dan visualisasi data.
 
 [🔍 Lihat Hasil Analisis Lengkap](analysis_answers.md)
 
@@ -16,56 +16,43 @@ matplotlib>=3.4.0
 seaborn>=0.11.0
 ```
 
-## Persiapan Environment
-
-1. Clone repository ini:
-```bash
-git clone <repository_url>
-cd <repository_name>
-```
-
-2. Buat dan aktifkan virtual environment:
-```bash
-# Windows
-python -m venv .venv
-.venv\Scripts\activate
-
-# Linux/Mac
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-4. Verifikasi instalasi:
-```bash
-python check_dependencies.py
-```
-Jika semua dependencies terinstall dengan benar, Anda akan melihat pesan konfirmasi.
-
-## Struktur File
+## Struktur Proyek
 
 ```
 .
-├── input/                      # Data input
+├── input/                     # Data input
 │   ├── semua_tabel.xlsx       # File data utama
-│   └── ...
+│   ├── tabel_koef_Serap_bunyi.xlsx
+│   ├── design_matrix.xlsx
+│   ├── nuisance_factors.xlsx
+│   └── hypothesis_table.xlsx
 ├── output/                    # Hasil analisis
-├── tabel_no3_tambahan.py     # Generate design matrix
-├── tabel_no8_tambahan.py     # Analisis ANOVA
-├── analysis_answers.md       # Penjelasan analisis
-├── requirements.txt          # Daftar dependencies
-└── README.md                # Dokumentasi
+│   ├── nomor3_tambahan.xlsx   # Design matrix RBD dan CRD
+│   ├── nomor8_tambahan.xlsx   # Hasil ANOVA
+│   └── plot/                  # Visualisasi dan plot
+│       ├── interaction_plot.png
+│       ├── means_plot.png
+│       ├── posthoc_plot.png
+│       └── ...
+├── raw_input/                 # Data mentah
+│   ├── generate_table_input.py
+│   ├── create_table_lampiran1.py
+│   ├── create_table_lampiran1_revised.py
+│   └── tabel_*.txt            # File teks data sumber
+├── tabel_no3_tambahan.py      # Generate design matrix
+├── tabel_no8_tambahan.py      # Analisis ANOVA
+├── plot_no30.py               # Script visualisasi data
+├── create_table_lampiran1.py  # Generate tabel lampiran
+├── dokumentasi_*.md           # Dokumentasi proses analisis
+├── analysis_answers.md        # Penjelasan analisis
+└── README.md                  # Dokumentasi
 ```
 
 ## Penggunaan
 
 1. **Persiapkan Data Input**:
-   - Pastikan file `semua_tabel.xlsx` ada di folder `input/`
-   - File harus memiliki sheet 'tabel_4.6' untuk referensi ANOVA
+   - Pastikan folder `input/` berisi file Excel yang diperlukan
+   - File `semua_tabel.xlsx` harus memiliki sheet yang sesuai untuk analisis
 
 2. **Generate Design Matrix**:
    ```bash
@@ -79,18 +66,32 @@ Jika semua dependencies terinstall dengan benar, Anda akan melihat pesan konfirm
    ```
    Menghasilkan file `output/nomor8_tambahan.xlsx` dengan hasil ANOVA dan perbandingan.
 
-4. **Lihat Hasil**:
-   - Buka file Excel di folder `output/`
-   - Baca penjelasan analisis di `analysis_answers.md`
+4. **Membuat Visualisasi**:
+   ```bash
+   python plot_no30.py
+   ```
+   Menghasilkan visualisasi di folder `output/plot/`.
+
+5. **Membuat Tabel Lampiran**:
+   ```bash
+   python create_table_lampiran1.py
+   ```
+
+## Dokumentasi
+
+Dokumentasi detail untuk masing-masing proses analisis tersedia dalam file berikut:
+- `dokumentasi_tabel_no3_tambahan.md` - Proses pembuatan design matrix
+- `dokumentasi_tabel_no8_tambahan.md` - Analisis ANOVA dan interpretasi
+- `dokumentasi_plot_no30.md` - Visualisasi data dan hasilnya
+- `dokumentasi_create_table_lampiran1.md` - Pembuatan tabel lampiran
 
 ## Troubleshooting
 
 Jika mengalami error:
 
 1. **ModuleNotFoundError**:
-   - Pastikan virtual environment aktif
-   - Jalankan `pip install -r requirements.txt` kembali
-   - Verifikasi dengan `python check_dependencies.py`
+   - Pastikan package yang diperlukan telah diinstall
+   - Jalankan `pip install <nama_package>` untuk menginstall package yang diperlukan
 
 2. **FileNotFoundError**:
    - Periksa struktur folder dan file input
@@ -99,7 +100,6 @@ Jika mengalami error:
 3. **Error lainnya**:
    - Periksa log error yang ditampilkan
    - Pastikan format data input sesuai
-   - Jika masih bermasalah, buat issue baru di repository
 
 ## Lisensi
 
