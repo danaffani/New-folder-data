@@ -20,16 +20,16 @@ seaborn>=0.11.0
 
 ```
 .
-├── input/                     # Data input
-│   ├── semua_tabel.xlsx       # File data utama
-│   ├── tabel_koef_Serap_bunyi.xlsx
+├── input/                                # Data input
+│   ├── semua_tabel.xlsx                  # File data utama
+│   ├── tabel_koef_Serap_bunyi.xlsx       # File data utama
 │   ├── design_matrix.xlsx
 │   ├── nuisance_factors.xlsx
 │   └── hypothesis_table.xlsx
-├── output/                    # Hasil analisis
-│   ├── nomor3_tambahan.xlsx   # Design matrix RBD dan CRD
-│   ├── nomor8_tambahan.xlsx   # Hasil ANOVA
-│   └── plot/                  # Visualisasi dan plot
+├── output/                               # Hasil analisis
+│   ├── nomor3_tambahan.xlsx              # Design matrix RBD dan CRD
+│   ├── nomor8_tambahan.xlsx              # Hasil ANOVA
+│   └── plot/                             # Visualisasi dan plot
 │       ├── interaction_plot.png
 │       ├── means_plot.png
 │       ├── posthoc_plot.png
@@ -52,7 +52,7 @@ seaborn>=0.11.0
 
 1. **Persiapkan Data Input**:
    - Pastikan folder `input/` berisi file Excel yang diperlukan
-   - File `semua_tabel.xlsx` harus memiliki sheet yang sesuai untuk analisis
+   - File `semua_tabel.xlsx` (sheets: tabel_4.6, untuk referensi) dan `tabel_koef_Serap_bunyi.xlsx` harus memiliki sheet yang sesuai untuk analisis
 
 2. **Generate Design Matrix**:
    ```bash
